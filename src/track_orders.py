@@ -1,12 +1,19 @@
 from Customer import Customer
 
 
+class DaysOpenCount(dict):
+    def __missing__(self, key):
+        return 0
+
+
 class TrackOrders:
     def __init__(self):
         self._orders_count = 0
         self._customers = dict()
         self._all_dish = set()
         self._all_days_open = set()
+        self._all_days_open_count = DaysOpenCount()
+        self._busiest_day = ""
 
     # aqui deve expor a quantidade de estoque
     def __len__(self):
@@ -22,6 +29,12 @@ class TrackOrders:
         self._all_dish.add(order)
         self._all_days_open.add(day)
 
+        self._all_days_open_count[day] += 1
+
+        busiest_day_count = self._all_days_open_count[self._busiest_day]
+        if self._all_days_open_count[day] > busiest_day_count:
+            self._busiest_day = day
+
     def get_most_ordered_dish_per_customer(self, customer):
         return self._customers[customer].most_ordered_dish_name
 
@@ -32,7 +45,7 @@ class TrackOrders:
         return self._all_days_open.difference(self._customers[customer].days)
 
     def get_busiest_day(self):
-        pass
+        return self._busiest_day
 
     def get_least_busy_day(self):
         pass
