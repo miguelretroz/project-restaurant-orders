@@ -26,7 +26,7 @@ class TrackOrders:
         return self._customers[customer].most_ordered_dish_name
 
     def get_never_ordered_per_customer(self, customer):
-        pass
+        return self._all_dish.difference(self._customers[customer].dishes)
 
     def get_days_never_visited_per_customer(self, customer):
         pass
