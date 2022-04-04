@@ -1,4 +1,4 @@
-from Customer import Customer
+from src.Customer import Customer
 
 
 class DaysOpenCount(dict):
