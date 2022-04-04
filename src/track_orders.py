@@ -16,7 +16,22 @@ class TrackOrders:
         self._orders_count += 1
 
     def get_most_ordered_dish_per_customer(self, customer):
-        pass
+        customer_orders = {}
+        most_ordered_dish_name = ""
+        most_ordered_dish_count = 0
+
+        if customer in self._orders:
+            for order, _ in self._orders[customer]:
+                if order not in customer_orders:
+                    customer_orders[order] = 1
+                else:
+                    customer_orders[order] += 1
+
+                if customer_orders[order] > most_ordered_dish_count:
+                    most_ordered_dish_name = order
+                    most_ordered_dish_count = customer_orders[order]
+
+            return most_ordered_dish_name
 
     def get_never_ordered_per_customer(self, customer):
         pass
