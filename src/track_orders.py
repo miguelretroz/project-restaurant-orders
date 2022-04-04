@@ -14,6 +14,7 @@ class TrackOrders:
         self._all_days_open = set()
         self._all_days_open_count = DaysOpenCount()
         self._busiest_day = ""
+        self._least_busy_day = ""
 
     # aqui deve expor a quantidade de estoque
     def __len__(self):
@@ -28,6 +29,9 @@ class TrackOrders:
         self._orders_count += 1
         self._all_dish.add(order)
         self._all_days_open.add(day)
+
+        if not self._all_days_open_count[day]:
+            self._least_busy_day = day
 
         self._all_days_open_count[day] += 1
 
@@ -48,4 +52,4 @@ class TrackOrders:
         return self._busiest_day
 
     def get_least_busy_day(self):
-        pass
+        return self._least_busy_day
