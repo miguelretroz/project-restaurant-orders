@@ -29,7 +29,7 @@ class TrackOrders:
         return self._all_dish.difference(self._customers[customer].dishes)
 
     def get_days_never_visited_per_customer(self, customer):
-        pass
+        return self._all_days_open.difference(self._customers[customer].days)
 
     def get_busiest_day(self):
         pass
