@@ -1,7 +1,9 @@
 class TrackOrders:
+    def __init__(self):
+        self._orders_count = 0
     # aqui deve expor a quantidade de estoque
     def __len__(self):
-        pass
+        return self._orders_count
 
     def add_new_order(self, customer, order, day):
         pass
