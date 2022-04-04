@@ -1,37 +1,29 @@
+from Customer import Customer
+
+
 class TrackOrders:
     def __init__(self):
         self._orders_count = 0
-        self._orders = {}
+        self._customers = dict()
+        self._all_dish = set()
+        self._all_days_open = set()
 
     # aqui deve expor a quantidade de estoque
     def __len__(self):
         return self._orders_count
 
     def add_new_order(self, customer, order, day):
-        if customer not in self._orders:
-            self._orders[customer] = [(order, day)]
+        if customer not in self._customers:
+            self._customers[customer] = Customer(customer, order, day)
         else:
-            self._orders[customer].append((order, day))
+            self._customers[customer].add_new_order(order, day)
 
         self._orders_count += 1
+        self._all_dish.add(order)
+        self._all_days_open.add(day)
 
     def get_most_ordered_dish_per_customer(self, customer):
-        customer_orders = {}
-        most_ordered_dish_name = ""
-        most_ordered_dish_count = 0
-
-        if customer in self._orders:
-            for order, _ in self._orders[customer]:
-                if order not in customer_orders:
-                    customer_orders[order] = 1
-                else:
-                    customer_orders[order] += 1
-
-                if customer_orders[order] > most_ordered_dish_count:
-                    most_ordered_dish_name = order
-                    most_ordered_dish_count = customer_orders[order]
-
-            return most_ordered_dish_name
+        return self._customers[customer].most_ordered_dish_name
 
     def get_never_ordered_per_customer(self, customer):
         pass
