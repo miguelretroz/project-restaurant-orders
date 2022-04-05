@@ -53,3 +53,11 @@ class InventoryControl:
     def get_quantities_to_buy(self):
         return self._quantities_to_buy
 
+    def get_available_dishes(self):
+        for dish in self.INGREDIENTS:
+            has_ingredient_not_available = self.INGREDIENTS[dish].intersection(
+                self.ingredients_not_available)
+            if len(has_ingredient_not_available) > 0:
+                self.dishes.discard(dish)
+
+        return self.dishes
