@@ -51,4 +51,5 @@ class InventoryControl:
                 self.dishes.discard(order)
 
     def get_quantities_to_buy(self):
-        pass
+        return self._quantities_to_buy
+
